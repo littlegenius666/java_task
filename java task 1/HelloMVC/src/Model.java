@@ -1,24 +1,27 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Yelyzaveta_Horbachen on 13.04.17.
  */
 public class Model {
 
-    public void setWord1(String word1) {
-        this.word1 = word1;
+    private List<String> words=new ArrayList<String>();
+    public void addWord(String word)
+    {
+        words.add(word);
     }
-
-    public void setWord2(String word2) {
-        this.word2 = word2;
-    }
-
-    private String word1;
-    private String word2;
 
     /**
      * Creates phrase from 2 words
      * @return phrase
      */
     public String createPhrase(){
-        return this.word1+" "+ this.word2;
+        String phrase="";
+        for (int i=0; i<words.size(); i++)
+        {
+            phrase+=words.get(i)+" ";
+        }
+        return phrase;
     }
 }

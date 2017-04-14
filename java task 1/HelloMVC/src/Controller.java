@@ -14,22 +14,24 @@ public class Controller {
 
     public void processUser(){
         Scanner sc = new Scanner(System.in);
-        model.setWord1(inputValueWithScanner(sc, 1));
-        model.setWord2(inputValueWithScanner(sc, 2));
+        for (int i=0; i<view.WORDS.length; i++)
+        {
+            model.addWord(inputValueWithScanner(sc,i));
+        }
         view.printMessage(model.createPhrase());
     }
 
     public String inputValueWithScanner(Scanner sc, int word) {
-        view.printMessage(view.INPUT_TEXT+view.WORDS[word-1]);
+        view.printMessage(view.INPUT_TEXT+view.WORDS[word]);
         boolean isequal=false;
         String row="";
         while(!isequal) {
             row=sc.next();
-            if (row.equals(view.WORDS[word-1])) {
+            if (row.equals(view.WORDS[word])) {
                 isequal=true;
             }
             else {
-                view.printMessage(view.WRONG_INPUT_INT_DATA + view.INPUT_TEXT + view.WORDS[word - 1]);
+                view.printMessage(view.WRONG_INPUT_INT_DATA + view.INPUT_TEXT + view.WORDS[word]);
             }
         }
         return row;
