@@ -16,13 +16,13 @@ public class View {
     }
 
     public void printGuessMessage(Integer low, Integer high) {
-        System.out.println("Введите число в диапазоне [" + low + "," + high + "]:");
+        System.out.println("Введите число в диапазоне (" + low + "," + high + "):");
     }
 
     public void printStatsMessage(List<Integer> guesses) {
         System.out.println("Вы угадали число с " + guesses.size() + " попыток.\nВаши попытки:");
-        for (int i=0; i<guesses.size(); i++) {
-            System.out.println((i+1)+" попытка: "+guesses.get(i));
+        for (int i = 0; i < guesses.size(); i++) {
+            System.out.println((i + 1) + " попытка: " + guesses.get(i));
         }
     }
 }

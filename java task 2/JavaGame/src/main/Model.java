@@ -10,8 +10,7 @@ public class Model {
 
     private Integer low;
     private Integer high;
-    List<Integer> guesses=new ArrayList<Integer>();
-
+    List<Integer> guesses = new ArrayList<Integer>();
 
     public Integer getLow() {
         return low;
@@ -21,15 +20,15 @@ public class Model {
         return high;
     }
 
-    public Model () {
-        this.low=0;
-        this.high=Integer.MAX_VALUE;
+    public Model() {
+        this.low = 0;
+        this.high = Integer.MAX_VALUE;
     }
 
     public Model(Integer low, Integer high) {
         Objects.requireNonNull(low);
         Objects.requireNonNull(high);
-        if (low<=high) {
+        if (low <= high) {
             this.low = low;
             this.high = high;
         } else {
@@ -40,15 +39,13 @@ public class Model {
 
     public Integer generateNumber() {
         Random r = new Random();
-        Integer randomNumber=0;
-        try {
-            randomNumber=r.nextInt((high+1) - low) + low;
-        }
-        catch (IllegalArgumentException e) {
-            randomNumber=r.nextInt(Integer.MAX_VALUE - low) + low;
+        Integer randomNumber = null;
+        if (high.equals(low)) {
+            randomNumber = high;
+        } else {
+            randomNumber = r.nextInt(high - low - 1) + low + 1;
         }
         return randomNumber;
-
     }
 
     public boolean guessedRight(Integer guess, Integer secret) {
