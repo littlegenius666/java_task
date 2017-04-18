@@ -71,7 +71,7 @@ public class ModelTest {
     public void testRandomEquability() {
         Model model=new Model(0,100);
         int iterationCount=1000;
-        int[] numbers=new int[(model.getHigh()+1)-model.getLow()];
+        Integer[] numbers=new Integer[(model.getHigh()+1)-model.getLow()];
         for (int i=0; i<numbers.length; i++) {
             numbers[i]=model.getLow()+i;
         }
@@ -80,14 +80,14 @@ public class ModelTest {
             Integer randomNumber=model.generateNumber();
             for (int j=0; j<numbers.length; j++) {
                 if (randomNumber==numbers[j]) {
-                    numbers[j]=-1;
+                    numbers[j]=null;
                 }
             }
         }
 
         for (int i=0; i<numbers.length; i++) {
 
-            if (numbers[i]!=-1) {
+            if (numbers[i]!=null) {
                 fail();
             }
         }
