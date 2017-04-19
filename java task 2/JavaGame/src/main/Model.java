@@ -55,9 +55,9 @@ public class Model {
             return true;
         } else {
             if (guess > secret) {
-                high = guess - 1;
+                high = guess;
             } else {
-                low = guess + 1;
+                low = guess;
             }
             return false;
         }
