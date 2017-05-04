@@ -1,5 +1,8 @@
 
+import jdk.nashorn.internal.ir.EmptyNode;
+
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 /**
  * RecordController controls the process of record filling.
@@ -7,10 +10,12 @@ import java.util.Scanner;
  * @author Yelyzaveta Horbachenko
  */
 public class RecordController implements GlobalConstants {
-    View view = new View();
+    Model model;
+    View view;
 
     // constructor
-    public RecordController(View view) {
+    public RecordController(Model model, View view) {
+        this.model=model;
         this.view = view;
     }
 
@@ -24,10 +29,14 @@ public class RecordController implements GlobalConstants {
      * @param message message with a rule.
      * @return correct value
      */
-    public String inputData(Scanner sc, String regex, String message) {
+    public String inputData(Scanner sc, String regex, String message) throws LoginIsNotUniqueException  {
         view.print(message);
         String input = sc.nextLine();
+        if (message.contains("nickname") && !model.loginIsUnique(input)) {
+            throw new LoginIsNotUniqueException();
+        }
         while (!checkInput(regex, input)) {
+
             view.print(WRONG_INPUT + message);
             input = sc.nextLine();
         }
@@ -41,7 +50,7 @@ public class RecordController implements GlobalConstants {
      * @param sc scanner
      * @return return true if user input yes, and false if no.
      */
-    public boolean userCheckInput(Scanner sc) {
+    public boolean userCheckInput(Scanner sc)  throws LoginIsNotUniqueException {
         return inputData(sc, REG_FOR_YES_OR_NO, INPUT_YES_OR_NO).equals("yes");
     }
 
@@ -61,14 +70,26 @@ public class RecordController implements GlobalConstants {
      *
      * @return record object.
      */
-    public Record inputDataWithScanner() {
+    public Record inputDataWithScanner()  throws LoginIsNotUniqueException {
         Record record = new Record();
         String secondMobilePhoneNumber;
         Scanner sc = new Scanner(System.in);
         String lastName = inputData(sc, Record.REG_FOR_NAME, INPUT_LAST_NAME);
         String firstName = inputData(sc, Record.REG_FOR_NAME, INPUT_FIRST_NAME);
         String secondName = inputData(sc, Record.REG_FOR_NAME, INPUT_MIDDLE_NAME);
-        String nickname = inputData(sc, Record.REG_FOR_NICKNAME, INPUT_NICKNAME);
+        boolean loginIsUnique=false;
+        StringBuilder nickname=new StringBuilder(0);
+        while (!loginIsUnique) {
+            try {
+                nickname.append(inputData(sc, Record.REG_FOR_NICKNAME, INPUT_NICKNAME));
+            }
+            catch (LoginIsNotUniqueException e){
+                view.print(e.getMessage());
+                continue;
+            }
+            loginIsUnique=true;
+        }
+
         view.print(INPUT_COMMENT);
         String comment = sc.nextLine();
         String group = inputData(sc, generateRegForGroups(), generateMessageForGroups());
@@ -89,7 +110,7 @@ public class RecordController implements GlobalConstants {
         String apartmentNumber = inputData(sc, Record.REG_FOR_APARTMENT_NUMBER, INPUT_APARTMENT_NUMBER);
         String inputDate = inputData(sc, Record.REG_FOR_DATE, INPUT_DATE_OF_LAST_RECORD);
         String changeDate = inputData(sc, Record.REG_FOR_DATE, INPUT_DATE_OF_CHANGE);
-        record.setRecordValues(lastName, firstName, secondName, nickname, comment, group, homePhoneNumber,
+        record.setRecordValues(lastName, firstName, secondName, nickname.toString(), comment, group, homePhoneNumber,
                 mobilePhoneNumber, secondMobilePhoneNumber, email, skype, inputDate, changeDate, index, city, street,
                 houseNumber, apartmentNumber);
         return record;

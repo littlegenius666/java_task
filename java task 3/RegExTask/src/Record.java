@@ -30,6 +30,11 @@ public class Record {
     private String firstName;
     private String secondName;
     private String allName;
+
+    public String getNickname() {
+        return nickname;
+    }
+
     private String nickname;
     private String comment;
     private Groups userGroup;

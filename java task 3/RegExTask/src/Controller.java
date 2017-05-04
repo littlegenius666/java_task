@@ -19,8 +19,13 @@ public class Controller {
      * prints it
      */
     public void processUser() {
-        RecordController recordController = new RecordController(view);
-        model.addRecord(recordController.inputDataWithScanner());
+        RecordController recordController = new RecordController(model, view);
+        try {
+            model.addRecord(recordController.inputDataWithScanner());
+        }
+        catch (LoginIsNotUniqueException e) {
+            view.print(e.getMessage());
+        }
         for (int i = 0; i < model.getRecordsList().size(); i++) {
             view.print(model.getRecordsList().get(i).toString());
         }

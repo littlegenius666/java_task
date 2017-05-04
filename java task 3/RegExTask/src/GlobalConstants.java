@@ -25,4 +25,5 @@ public interface GlobalConstants {
     String INPUT_YES_OR_NO = "Write \'yes\' if you want to write your second mobile phone number, and \'no\' if not. ";
     String REG_FOR_YES_OR_NO = "^(yes|no)$";
     String WRONG_INPUT = "Wrong input! ";
+    String WRONG_NICKNAME = "Nickname must be unique! ";
 }

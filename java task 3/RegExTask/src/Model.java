@@ -12,6 +12,17 @@ public class Model {
      */
     private ArrayList<Record> recordsList = new ArrayList<Record>();
 
+    public boolean loginIsUnique(String element) {
+        for (Record record: recordsList
+             ) {
+            if (element.equals(record.getNickname())) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
     /**
      * Adds a record to recordsList
      *
