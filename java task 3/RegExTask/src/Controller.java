@@ -22,6 +22,7 @@ public class Controller {
         RecordController recordController = new RecordController(model, view);
         try {
             model.addRecord(recordController.inputDataWithScanner());
+            model.addRecord(recordController.inputDataWithScanner());
         }
         catch (LoginIsNotUniqueException e) {
             view.print(e.getMessage());
