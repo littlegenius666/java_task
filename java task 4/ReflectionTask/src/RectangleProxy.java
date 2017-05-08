@@ -3,6 +3,7 @@
  */
 public class RectangleProxy implements IRectangle {
     private Rectangle rectangle;
+
     public int getHeight() {
         if(rectangle == null) {
             rectangle = new Rectangle();
