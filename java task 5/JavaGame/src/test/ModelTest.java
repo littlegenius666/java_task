@@ -123,7 +123,6 @@ public class ModelTest {
         Integer secret = 50;
         Integer guess = 80;
         boolean guessed = model.guessedRight(guess, secret);
-        guess--;
         assertEquals(guess, model.getHigh());
     }
 
@@ -134,7 +133,6 @@ public class ModelTest {
         Integer secret = 50;
         Integer guess = 20;
         boolean guessed = model.guessedRight(guess, secret);
-        guess++;
         assertEquals(guess, model.getLow());
     }
 
