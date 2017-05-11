@@ -3,12 +3,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.OngoingStubbing;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.Scanner;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.Mockito.*;
 
 /**
@@ -17,46 +17,88 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class MockitoControllerTest {
 
+    List<Integer> testData;
     @Test
     public void testStart() {
-        Model model=spy(Model.class);
+        testData = Arrays.asList(TestData.testStart1.data);
+        Model model = spy(Model.class);
         model.setLow(0);
         model.setHigh(100);
-        when(model.generateNumber()).thenReturn(50);
-        View view=spy(View.class);
-        Reader reader=mock(Reader.class);
-        when(reader.setNumberInRange(anyInt(),anyInt(),any(View.class))).thenReturn(-30).thenReturn(130).thenReturn(20).thenReturn(50);
+        Integer expected = 50;
+        when(model.generateNumber()).thenReturn(expected);
+        View view = spy(View.class);
+        Reader reader = mock(Reader.class);
+        OngoingStubbing stubbing = when(reader.setNumberInRange(anyInt(), anyInt(), any(View.class)));
+        Integer lastIndex = testData.indexOf(expected);
+        if (lastIndex != -1) {
+            int outOfRange = 0, inRangeGreater = 0, inRangeSmaller = 0;
+            for (int i = 0; i <= lastIndex; i++) {
+                int elem = testData.get(i);
+                stubbing = stubbing.thenReturn(elem);
+                if (elem > model.getLow() && elem < expected) {
+                    inRangeSmaller++;
+                }
+                if (elem < model.getHigh() && elem > expected)
+                    inRangeGreater++;
+                }
 
-        Controller controller1=new Controller(model,view,reader);
-        controller1.start();
-        verify(view).printMessage(view.HELLO);
-        verify(model).generateNumber();
-        verify(model).guessedRight(20, 50);
-        verify(view).printMessage(view.IS_LARGER);
-        verify(reader).setNumberInRange(model.getLow(),model.getHigh(), view);
-        verify(model).guessedRight(50, 50);
-        verify(view).printMessage(view.CONGRATULATIONS);
-        verify(view).printStatsMessage(model.guesses);
 
-        assertEquals(model.generateNumber(),reader.setNumberInRange(0,100,view));
+            Controller controller1 = new Controller(model, view, reader);
+            controller1.start();
+            verify(view, times(1)).printMessage(view.HELLO);
+            verify(model, times(1)).generateNumber();
+            verify(model, times(inRangeGreater + inRangeSmaller)).guessedRight(not(eq(expected)), eq(expected));
+            verify(view, times(inRangeSmaller)).printMessage(view.IS_LARGER);
+            verify(view, times(inRangeGreater)).printMessage(view.IS_SMALLER);
+            verify(reader, times(lastIndex + 1)).setNumberInRange(anyInt(), anyInt(), any(View.class));
+            verify(model, times(1)).guessedRight(expected, expected);
+            verify(view, times(1)).printMessage(view.CONGRATULATIONS);
+            verify(view, times(1)).printStatsMessage(model.guesses);
+
+            assertEquals(expected, reader.setNumberInRange(model.getLow(), model.getHigh(), view));
+        } else {
+            System.err.println("Test data doesn't have expected value. Please, check it again.");
+            fail();
+        }
     }
+
+
 
     @Test
     public void testInputGuess() {
+        testData= Arrays.asList(TestData.testInputGuess1.data);
         View view=spy(View.class);
-
+        Model model=new Model();
+        model.setLow(0);
+        model.setHigh(100);
         Reader reader=mock(Reader.class);
-        when(reader.setNumberInRange(anyInt(),anyInt(),any(View.class))).thenReturn(-30).thenReturn(130).thenReturn(20).thenReturn(50);
-        Model model=new Model(0,100);
-        Controller controller1=new Controller(model,view,reader);
+        OngoingStubbing stubbing = when(reader.setNumberInRange(anyInt(), anyInt(), any(View.class)));
+        Integer elementInRange=null;
+        for (Integer elem:testData
+             ) {
+            if (elem>model.getLow() && elem<model.getHigh()) {
+                elementInRange=elem;
+                break;
+            }
+        }
+        if (elementInRange!=null) {
+            int outOfRange = 0;
+            Integer lastIndex=testData.indexOf(elementInRange);
+            for (int i=0; i<=lastIndex; i++) {
+                stubbing = stubbing.thenReturn(testData.get(i));
+            }
+            Controller controller1=new Controller(model,view,reader);
+            Integer guess=controller1.inputGuess(model.getLow(),model.getHigh());
+            verify(view,times(lastIndex+1)).printGuessMessage(model.getLow(),model.getHigh());
+            verify(reader, times(lastIndex+1)).setNumberInRange(anyInt(),anyInt(),any(View.class));
+            verify(view, times(lastIndex)).printMessage(view.OUT_OF_RANGE);
 
-        Integer expected=20;
-        Integer guess=controller1.inputGuess(model.getLow(),model.getHigh());
-        verify(view,times(3)).printGuessMessage(0,100);
-        verify(reader, times(3)).setNumberInRange(model.getLow(),model.getHigh(),view);
-        verify(view, times(2)).printMessage(view.OUT_OF_RANGE);
+        } else {
+            System.err.println("Test data doesn't have value in range ("+model.getLow()+","+model.getHigh()+"). Please, check it again.");
+            fail();
+        }
 
-        assertEquals(expected,guess);
+
     }
 
 }
