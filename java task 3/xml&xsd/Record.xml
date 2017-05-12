@@ -1,0 +1,49 @@
+<recordBook>
+	<record>
+		<allName>
+			<lastName>Horbachenko</lastName>
+			<firstName>Yelyzaveta</firstName>
+			<middleName>Dmytrivna</middleName>
+		</allName>
+		<nickname>littlegenius666</nickname>
+		<comment></comment>
+		<userGroup>Student</userGroup>
+		<homeTelephoneNumber>+380442747759</homeTelephoneNumber>
+		<mobileTelephoneNumber>+380509265404</mobileTelephoneNumber>
+		<email>littlegenius666@gmail.com</email>
+		<skype>littlegenius666</skype>
+		<fullAddress>
+			<index>03162</index>
+			<city>Kyiv</city>
+			<street>Lesya Kurbasa street</street>
+			<houseNumber>16</houseNumber>
+			<apartmentNumber>125</apartmentNumber>
+		</fullAddress>
+		<inputDate>25/01/2017</inputDate>
+		<changeDate>27/01/2017</changeDate>
+	</record>
+	<record>
+		<allName>
+			<lastName>Pupkin</lastName>
+			<firstName>Ivan</firstName>
+			<middleName>Ivanovych</middleName>
+		</allName>
+		<nickname>lol123</nickname>
+		<comment>Hi!</comment>
+		<userGroup>Senior</userGroup>
+		<homeTelephoneNumber>+380441111111</homeTelephoneNumber>
+		<mobileTelephoneNumber>+380503333333</mobileTelephoneNumber>
+		<secondMobileTelephoneNumber>+380502222222</secondMobileTelephoneNumber>
+		<email>lollol123@gmail.com</email>
+		<skype>lol123</skype>
+		<fullAddress>
+			<index>44444</index>
+			<city>Kyiv</city>
+			<street>Romena Rolana street</street>
+			<houseNumber>2b</houseNumber>
+			<apartmentNumber>18</apartmentNumber>
+		</fullAddress>
+		<inputDate>25/01/2017</inputDate>
+		<changeDate>26/03/2017</changeDate>
+	</record>
+</recordBook>
