@@ -1,0 +1,19 @@
+2017-05-12 11:32:17,968 [main] INFO  Controller - Game started.
+2017-05-12 11:32:17,969 [main] INFO  Model - Generated a random number with value 40
+2017-05-12 11:32:21,794 [main] INFO  Reader - User inputted a number with value 50
+2017-05-12 11:32:21,794 [main] INFO  Controller - Inputted value is greater than generated.
+2017-05-12 11:32:25,425 [main] INFO  Reader - User inputted a number with value 75
+2017-05-12 11:32:25,426 [main] INFO  Controller - Inputted value is out of model bounds.
+2017-05-12 11:32:26,442 [main] WARN  Reader - User tried to input a non-numeric valueaf
+2017-05-12 11:32:29,282 [main] INFO  Reader - User inputted a number with value -30
+2017-05-12 11:32:29,282 [main] INFO  Controller - Inputted value is out of model bounds.
+2017-05-12 11:32:30,794 [main] INFO  Reader - User inputted a number with value 25
+2017-05-12 11:32:30,794 [main] INFO  Controller - Inputted value is smaller than generated.
+2017-05-12 11:32:33,009 [main] INFO  Reader - User inputted a number with value 38
+2017-05-12 11:32:33,009 [main] INFO  Controller - Inputted value is smaller than generated.
+2017-05-12 11:32:35,105 [main] INFO  Reader - User inputted a number with value 45
+2017-05-12 11:32:35,106 [main] INFO  Controller - Inputted value is greater than generated.
+2017-05-12 11:32:39,658 [main] INFO  Reader - User inputted a number with value 42
+2017-05-12 11:32:39,658 [main] INFO  Controller - Inputted value is greater than generated.
+2017-05-12 11:32:41,753 [main] INFO  Reader - User inputted a number with value 40
+2017-05-12 11:32:41,754 [main] INFO  Main - Game finished.
