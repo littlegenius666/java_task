@@ -82,7 +82,6 @@ public class MockitoControllerTest {
             }
         }
         if (elementInRange!=null) {
-            int outOfRange = 0;
             Integer lastIndex=testData.indexOf(elementInRange);
             for (int i=0; i<=lastIndex; i++) {
                 stubbing = stubbing.thenReturn(testData.get(i));
