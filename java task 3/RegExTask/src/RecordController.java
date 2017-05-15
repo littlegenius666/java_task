@@ -113,7 +113,7 @@ public class RecordController implements GlobalConstants {
         record.setRecordValues(lastName, firstName, secondName, nickname.toString(), comment, group, homePhoneNumber,
                 mobilePhoneNumber, secondMobilePhoneNumber, email, skype, inputDate, changeDate, index, city, street,
                 houseNumber, apartmentNumber);
-        view.print(GlobalConstants.END_OF_RECORD);
+        view.print(END_OF_RECORD);
         return record;
 
     }

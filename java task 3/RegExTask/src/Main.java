@@ -9,7 +9,8 @@ public class Main {
         Model model = new Model();
         View view = new View();
         Controller controller = new Controller(model, view);
+        RecordController recordController=new RecordController(model, view);
         //Run
-        controller.processUser();
+        controller.processUser(recordController);
     }
 }

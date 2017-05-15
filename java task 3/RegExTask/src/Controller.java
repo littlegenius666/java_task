@@ -11,15 +11,14 @@ public class Controller {
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-
     }
 
     /**
      * The main method, which creates recordController, then creates a record and
      * prints it
      */
-    public void processUser() {
-        RecordController recordController = new RecordController(model, view);
+    public void processUser(RecordController recordController) {
+
         try {
             model.addRecord(recordController.inputDataWithScanner());
             model.addRecord(recordController.inputDataWithScanner());

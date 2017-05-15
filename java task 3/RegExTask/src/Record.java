@@ -173,7 +173,7 @@ public class Record {
                 + ", HomeTelephoneNumber=" + homeTelephoneNumber + ", MobileTelephoneNumber=" + mobileTelephoneNumber
                 + ((getSecondMobileTelephoneNumber() != null)
                 ? ", SecondMobileTelephoneNumber=" + getSecondMobileTelephoneNumber() : "")
-                + ", Email=" + email + ", Skype=" + skype + ", UserAdress=" + userAddress.toString() + ", FullAdress="
+                + ", Email=" + email + ", Skype=" + skype + ", UserAddress=" + userAddress.toString() + ", FullAddress="
                 + fullAddress + ", InputDate=" + inputDate + ", ChangeDate=" + changeDate + "]";
     }
 
